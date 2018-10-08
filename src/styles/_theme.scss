@@ -1,0 +1,98 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$primary: (
+    50 : #e3f2f8,
+    100 : #badeec,
+    200 : #8cc8e0,
+    300 : #5eb2d4,
+    400 : #3ca2ca,
+    500 : #1991c1,
+    600 : #1689bb,
+    700 : #127eb3,
+    800 : #0e74ab,
+    900 : #08629e,
+    A100 : #cae8ff,
+    A200 : #97d1ff,
+    A400 : #64baff,
+    A700 : #4bafff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$accent: (
+    50 : #e8eaea,
+    100 : #c5caca,
+    200 : #9fa7a7,
+    300 : #788484,
+    400 : #5b6969,
+    500 : #3e4f4f,
+    600 : #384848,
+    700 : #303f3f,
+    800 : #283636,
+    900 : #1b2626,
+    A100 : #6effff,
+    A200 : #3bffff,
+    A400 : #08ffff,
+    A700 : #00eded,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$backgrounds: (
+  // status-bar: map_get($mat-grey, 300),
+  // app-bar: map_get($mat-grey, 100),
+  //background: rgba(#000, 0.02),
+  // background-light: rgba(#000, 0.02),
+  // hover: rgba(black, 0.04),
+  card: rgba(#fff, 0.6),
+  dialog: rgba(#fff, 0.8),
+  // disabled-button: rgba(black, 0.12),
+  // raised-button: #fff,
+  // focused-button: $dark-focused,
+  // selected-button: map_get($mat-grey, 300),
+  // selected-disabled-button: map_get($mat-grey, 400),
+  // disabled-button-toggle: map_get($mat-grey, 200),
+  // unselected-chip: map_get($mat-grey, 300),
+  // disabled-list-option: map_get($mat-grey, 200)
+);
+
+$mat-light-theme-background: map-merge($mat-light-theme-background, $backgrounds);
+@include angular-material-theme(mat-light-theme(mat-palette($primary), mat-palette($accent), mat-palette($mat-red)));
+
+@font-face {
+    font-family: 'FranchiseRegular';
+    src: url(assets/franchise.ttf) format('truetype');
+}
+
+$franchise: mat-typography-config($font-family: "FranchiseRegular,Arial,sans-serif");
+
+@include mat-base-typography($franchise);

@@ -1,0 +1,191 @@
+<mat-vertical-stepper class="mat-elevation-z4" #linearVerticalStepper="matVerticalStepper" [linear]="true"
+  [selectedIndex]="0">
+  <mat-step #achatStep [stepControl]="calculatorForm.get('achat')">
+    <form [formGroup]="calculatorForm.get('achat')">
+      <ng-template matStepLabel><span class="mat-h1">Achat</span></ng-template>
+      <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
+          <mat-form-field>
+            <input matInput type="number" formControlName="prix" name="prix" placeholder="Prix d'achat">
+          </mat-form-field>
+          <mat-radio-group fxLayout fxLayoutGap="20px" formControlName="type">
+            <mat-radio-button color="primary" [value]="0.22">
+              Neuf
+            </mat-radio-button>
+            <mat-radio-button color="primary" [value]="0.15">
+              Ancien
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+          <button mat-raised-button color="primary" matStepperNext>Suivant</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="calculatorForm.get('extraCosts')">
+    <form [formGroup]="calculatorForm.get('extraCosts')">
+      <ng-template matStepLabel><span class="mat-h1">Frais supplementaires</span></ng-template>
+      <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
+          <mat-form-field>
+            <input matInput type="number" formControlName="travauxAchat" name="travauxAchat" placeholder="Travaux à l'achat">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="number" formControlName="travauxEntretien" name="travauxEntretien" placeholder="Travaux d'entretien / mois">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="number" formControlName="charges" name="charges" placeholder="Charges / mois">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="number" formControlName="precompte" name="precompte" placeholder="Précompte immobilier">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <button mat-raised-button color="primary" matStepperPrevious>Précèdant</button>
+          <button mat-raised-button color="primary" matStepperNext>Suivant</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="calculatorForm.get('financement')">
+    <form [formGroup]="calculatorForm.get('financement')">
+      <ng-template matStepLabel><span class="mat-h1">Financement</span></ng-template>
+      <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
+          <mat-form-field>
+            <input matInput type="number" formControlName="cash" name="cash" placeholder="Apport">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="number" formControlName="years" name="years" placeholder="Nombre d'année">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="number" formControlName="taux" name="taux" placeholder="Taux">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <button mat-raised-button color="primary" matStepperPrevious>Précèdant</button>
+          <button mat-raised-button color="primary" matStepperNext>Suivant</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="calculatorForm.get('incomes')">
+    <form [formGroup]="calculatorForm.get('incomes')">
+      <ng-template matStepLabel><span class="mat-h1">Loyer</span></ng-template>
+      <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
+          <mat-form-field>
+            <input matInput type="number" formControlName="loyer" name="loyer" placeholder="Loyer / mois">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="number" formControlName="videLocatif" name="videLocatif" placeholder="Vide locatif en mois / an">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <button mat-raised-button color="primary" matStepperPrevious>Précèdant</button>
+          <button mat-raised-button color="primary" matStepperNext>Suivant</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel><span class="mat-h1">Resultat / mois</span></ng-template>
+    <div fxLayout="column" fxLayoutGap="20px">
+      <div fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayout="row" fxLayoutGap="10%">
+        <div fxFlex="45%" fxLayout="column" fxLayoutGap="6px">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Cout du projet: {{achat.totalWithInterest | number:'1.0-0'}}€
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div fxLayout="column" fxLayoutGap="10px">
+              <div fxLayout fxLayoutAlign="space-between center">
+                <span fxLayout fxLayoutAlign="start center">Prix total <mat-icon color="primary" [matTooltip]="calculatorForm.get('achat').get('type').value === 0.22?'Prix avec TVA + frais de notaire':'Prix avec droits d\'enregistrement + frais de notaire'">info</mat-icon>:</span>
+                <span>{{achat.total | number:'1.0-0'}}€</span>
+              </div>
+              <div fxLayout fxLayoutAlign="space-between center">
+                <span>Travaux initiaux:</span>
+                <span>+ {{calculatorForm.get('extraCosts').get('travauxAchat').value | number:'1.0-0'}}€</span>
+              </div>
+              <div *ngIf="calculatorForm.get('financement').get('cash').value" fxLayout fxLayoutAlign="space-between center">
+                <span>Cash injecté:</span>
+                <span>- {{calculatorForm.get('financement').get('cash').value | number:'1.0-0'}}€</span>
+              </div>
+              <mat-divider></mat-divider>
+              <div fxLayout fxLayoutAlign="space-between center">
+                <span>Total à emprunter:</span>
+                <span>{{achat.emprunt | number:'1.0-0'}}€</span>
+              </div>
+              <mat-divider></mat-divider>
+              <div fxLayout fxLayoutAlign="space-between center">
+                <span>Total avec interet (sur {{calculatorForm.get('financement').get('years').value}} ans à
+                  {{calculatorForm.get('financement').get('taux').value}}%)</span>
+                <b><span>{{achat.totalWithInterest | number:'1.0-0'}}€</span></b>
+              </div>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Sorties: {{ sorties.total | number:'1.0-0'}}€ / mois
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div fxLayout="column" fxLayoutGap="10px">
+              <div fxLayout fxLayoutAlign="space-between center"><span>Emprunt:</span> <span>{{ sorties.emprunt |
+                  number:'1.0-0'}}€</span></div>
+              <div fxLayout fxLayoutAlign="space-between center"><span>Charges:</span> <span>{{
+                  calculatorForm.getRawValue().extraCosts.charges | number:'1.0-0'}}€</span></div>
+              <div fxLayout fxLayoutAlign="space-between center"><span>Précompte:</span> <span>{{
+                  (calculatorForm.getRawValue().extraCosts.precompte/12) | number:'1.0-0' }}€</span></div>
+              <div fxLayout fxLayoutAlign="space-between center"><span>Entretien:</span> <span>{{
+                  calculatorForm.getRawValue().extraCosts.travauxEntretien | number:'1.0-0'}}€</span></div>
+              <mat-divider></mat-divider>
+              <div fxLayout fxLayoutAlign="space-between center"><span><b>Total:</b></span> <span><b>{{ sorties.total |
+                    number:'1.0-0'}}€</b></span></div>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Entrées: {{ incomes.totalNet | number:'1.0-0'}}€ / mois
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div fxLayout="column" fxLayoutGap="10px">
+              <div fxLayout fxLayoutAlign="space-between center"><span>Loyer:</span> <span>{{
+                  calculatorForm.getRawValue().incomes.loyer | number:'1.0-0'}}€</span></div>
+              <mat-divider></mat-divider>
+              <div fxLayout fxLayoutAlign="space-between center">
+                <span fxLayout fxLayoutAlign="space-between center">Total net: <mat-icon color="primary" [matTooltip]="'Tenant en compte du vide locatif de '+calculatorForm.getRawValue().incomes.videLocatif+' mois'">info</mat-icon>:</span>
+                <span>{{incomes.totalNet | number:'1.0-0'}}€</span>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </div>
+        <div fxFlex="45%">
+          <mat-card class="result">
+            <p class="mat-display-1">Balance / mois: {{balance | number:'1.0-0'}}€</p>
+            <p class="mat-display-1">Balance sur {{calculatorForm.getRawValue().financement.years}} ans:
+              {{balance*12*calculatorForm.getRawValue().financement.years | number:'1.0-0'}}€</p>
+          </mat-card>
+        </div>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" matStepperPrevious>Précèdant</button>
+      </div>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
