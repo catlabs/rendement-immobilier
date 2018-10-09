@@ -1,4 +1,4 @@
-<mat-toolbar color="accent">
+<mat-toolbar color="accent" class="mat-elevation-z8">
   <img class="catlabs-logo" src="/assets/logo-minimal.png" alt="">
 </mat-toolbar>
 <!--<ul>
@@ -6,30 +6,6 @@
     {{ item.price }}
   </li>
 </ul>-->
-<div fxLayout fxLayoutAlign="center">
-  <div class="catlabs-immo-container" fxFlex="100" [fxFlex.gt-md]="'980px'">
-    <h1 class="mat-display-3">Calcul de rendement immobilier</h1>
-    <catlabs-immo-calculator></catlabs-immo-calculator>
-    <!--<div fxLayout fxLayoutAlign="center">
-      <div fxFlex="100" [fxFlex.gt-sm]="50">
-        <mat-card class="dashboard-card">
-          <mat-card-header>
-            <mat-card-title>
-              Calculator
-              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item>Expand</button>
-                <button mat-menu-item>Remove</button>
-              </mat-menu>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="dashboard-card-content">
-            <catlabs-immo-calculator></catlabs-immo-calculator>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>-->
-  </div>
+<div class="main-container" fxLayout fxLayoutAlign="center">
+  <router-outlet></router-outlet>
 </div>

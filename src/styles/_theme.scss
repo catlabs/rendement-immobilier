@@ -93,6 +93,10 @@ $mat-light-theme-background: map-merge($mat-light-theme-background, $backgrounds
     src: url(assets/franchise.ttf) format('truetype');
 }
 
-$franchise: mat-typography-config($font-family: "FranchiseRegular,Arial,sans-serif");
+$franchise: mat-typography-config(
+    $font-family: "FranchiseRegular,Arial,sans-serif",
+    $headline: mat-typography-level(36px, 48px, 700),
+    $title: mat-typography-level(30px, 42px, 700)
+);
 
 @include mat-base-typography($franchise);

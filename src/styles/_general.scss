@@ -1,16 +1,34 @@
+html{
+    height: 100%;
+}
+
 body{
     background: url(/assets/background.jpg) top;
+    height: 100%;
 }
 
 .catlabs-logo{
-    height: 30px;;
+    height: 30px;
 }
 
 .catlabs-immo-container{
     margin: 80px 80px;
 }
 
-/*@include mat-select-typography($franchise);
-h1{
-    font-family: mat-font-family($franchise);
-}*/
+.spinner-container{
+    background-color: rgba($color: #fff, $alpha: 0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.mat-snack-bar-container{
+    &.success{
+        background-color: #10CE9D;
+    }
+    &.error{
+        background-color: #CB2F4D;
+    }
+}

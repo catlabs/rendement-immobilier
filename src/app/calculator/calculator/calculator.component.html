@@ -2,7 +2,7 @@
   [selectedIndex]="0">
   <mat-step #achatStep [stepControl]="calculatorForm.get('achat')">
     <form [formGroup]="calculatorForm.get('achat')">
-      <ng-template matStepLabel><span class="mat-h1">Achat</span></ng-template>
+      <ng-template matStepLabel><span class="mat-h2">Achat</span></ng-template>
       <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
           <mat-form-field>
@@ -26,7 +26,7 @@
 
   <mat-step [stepControl]="calculatorForm.get('extraCosts')">
     <form [formGroup]="calculatorForm.get('extraCosts')">
-      <ng-template matStepLabel><span class="mat-h1">Frais supplementaires</span></ng-template>
+      <ng-template matStepLabel><span class="mat-h2">Frais supplementaires</span></ng-template>
       <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
           <mat-form-field>
@@ -52,7 +52,7 @@
 
   <mat-step [stepControl]="calculatorForm.get('financement')">
     <form [formGroup]="calculatorForm.get('financement')">
-      <ng-template matStepLabel><span class="mat-h1">Financement</span></ng-template>
+      <ng-template matStepLabel><span class="mat-h2">Financement</span></ng-template>
       <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
           <mat-form-field>
@@ -75,7 +75,7 @@
 
   <mat-step [stepControl]="calculatorForm.get('incomes')">
     <form [formGroup]="calculatorForm.get('incomes')">
-      <ng-template matStepLabel><span class="mat-h1">Loyer</span></ng-template>
+      <ng-template matStepLabel><span class="mat-h2">Loyer</span></ng-template>
       <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
         <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="40px">
           <mat-form-field>
@@ -94,7 +94,7 @@
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel><span class="mat-h1">Resultat / mois</span></ng-template>
+    <ng-template matStepLabel><span class="mat-h2">Resultat / mois</span></ng-template>
     <div fxLayout="column" fxLayoutGap="20px">
       <div fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayout="row" fxLayoutGap="10%">
         <div fxFlex="45%" fxLayout="column" fxLayoutGap="6px">
