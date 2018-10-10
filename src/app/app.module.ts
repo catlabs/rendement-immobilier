@@ -22,12 +22,15 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 import { CoreModule } from './core/core.module';
 import { AuthGuard } from './core/auth.guard';
+import { AuthService } from './core/auth.service';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { VisitorPageComponent } from './pages/visitor-page/visitor-page.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'sign-up', component: RegisterPageComponent },
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: '', component: VisitorPageComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -37,7 +40,8 @@ const appRoutes: Routes = [
     TableComponent,
     CalculatorComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    VisitorPageComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
@@ -75,7 +79,7 @@ const appRoutes: Routes = [
       { enableTracing: false } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

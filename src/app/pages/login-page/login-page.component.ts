@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit {
       this.auth.auth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
         .then( (_result) => {
           this.isLoading = false;
-          this.router.navigateByUrl("");
+          this.router.navigateByUrl("dashboard");
         }, (err) => {
           this.isLoading = false;
           this.snackBar.open("Erreur lors de l'inscription: "+err.message, "", {

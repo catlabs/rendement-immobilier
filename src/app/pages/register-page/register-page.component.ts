@@ -33,7 +33,7 @@ export class RegisterPageComponent implements OnInit {
           });
           this.isLoading = false;
           this.auth.auth.signInWithEmailAndPassword(this.registerForm.value.email, this.registerForm.value.password);
-          this.router.navigateByUrl("");
+          this.router.navigateByUrl("dashboard");
           
         }, (err) => {
           this.snackBar.open("Erreur lors de l'inscription: "+err.message, "", {

@@ -1,11 +1,23 @@
-<mat-toolbar color="accent" class="mat-elevation-z8">
-  <img class="catlabs-logo" src="/assets/logo-minimal.png" alt="">
-</mat-toolbar>
-<!--<ul>
-  <li *ngFor="let item of items | async">
-    {{ item.price }}
-  </li>
-</ul>-->
-<div class="main-container" fxLayout fxLayoutAlign="center">
-  <router-outlet></router-outlet>
-</div>
+<ng-container *ngIf="hasInit; else loadingScreen">
+  <mat-toolbar color="accent" class="mat-elevation-z8" fxLayout fxLayoutAlign="space-between center">
+    <img class="catlabs-logo" src="/assets/logo-minimal.png" alt="">
+    <div>
+      <button *ngIf="!authService.user" mat-raised-button color="primary" routerLink="/login">Se connecter</button>
+      <button *ngIf="authService.user" mat-raised-button color="primary" (click)="logout()">Deconnection</button>
+    </div>
+  </mat-toolbar>
+  <!--<ul>
+        <li *ngFor="let item of items | async">
+          {{ item.price }}
+        </li>
+      </ul>-->
+  <div class="main-container" fxLayout fxLayoutAlign="center">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+
+<ng-template #loadingScreen>
+  <!--<div class="spinner-container" fxLayout fxLayoutAlign="center center">
+    <mat-spinner></mat-spinner>
+  </div>-->
+</ng-template>
