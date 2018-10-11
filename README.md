@@ -6,6 +6,22 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Database connection
+
+This project is hosted by firebase, so you first need to have a firebase account and create your project: https://firebase.google.com/
+
+Then, you need to add your own database keys in src/app/database-keys.ts
+```
+export const firebaseConfig = {
+    apiKey: "###",
+    authDomain: "###",
+    databaseURL: "###",
+    projectId: "###",
+    storageBucket: "###",
+    messagingSenderId: "###"
+}
+```
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
