@@ -1,6 +1,13 @@
 <div class="catlabs-immo-container" fxFlex="100" [fxFlex.gt-md]="'980px'">
   <h1 class="mat-display-3">Dashboard</h1>
-  <catlabs-immo-calculator></catlabs-immo-calculator>
+  <div fxLayout fxLayoutAlign="space-around center">
+    <mat-card class="add-card" fxLayout fxLayoutAlign="center center" (click)="openDialogAddSimulation()">
+      <div fxLayout="column" fxLayoutAlign="center center">
+          <mat-icon color="primary" [inline]="true">add</mat-icon>
+          <h2 class="mat-h2">Ajouter une simulation</h2>
+      </div>
+    </mat-card>
+  </div>
 </div>
 <!--<div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>

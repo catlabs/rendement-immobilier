@@ -1,5 +1,5 @@
 .mat-stepper-horizontal, .mat-stepper-vertical{
-    
+    background: none;
 }
 
 .mat-card.result{
@@ -7,5 +7,8 @@
     color: #fff;
     p{
         margin-bottom: 0px;
+        &.mat-display-1{
+            color: inherit;
+        }
     }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'catlabs-immo-calculator',
@@ -25,7 +26,7 @@ export class CalculatorComponent implements OnInit {
 
   calculatorForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, public auth:AuthService) { }
 
   ngOnInit() {
     this.calculatorForm = this.fb.group({
@@ -48,7 +49,37 @@ export class CalculatorComponent implements OnInit {
         loyer: [undefined, Validators.required],
         videLocatif: [undefined, Validators.required]
       }),
+      store: this.fb.group({
+        name: [undefined, Validators.required]
+      })
     });
+
+    /*this.calculatorForm = this.fb.group({
+      achat: this.fb.group({
+        prix: [280000, Validators.required],
+        type: [0.15]
+      }),
+      extraCosts: this.fb.group({
+        charges: [350, Validators.required],
+        precompte: [1000, Validators.required],
+        travauxAchat: [10000, Validators.required],
+        travauxEntretien: [50, Validators.required]
+      }),
+      financement: this.fb.group({
+        cash: [20000],
+        taux: [1.8, Validators.required],
+        years: [20, Validators.required]
+      }),
+      incomes: this.fb.group({
+        loyer: [1700, Validators.required],
+        videLocatif: [1, Validators.required]
+      }),
+      store: this.fb.group({
+        name: [undefined, Validators.required]
+      })
+    });*/
+
+
     this.generateResult();
     //console.log(this.calculatorForm.value);
     //(100000 * 0.02 / 12) / ( 1 - Math.pow(( 1 + 0.02 / 12 ), -240))

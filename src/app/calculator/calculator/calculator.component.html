@@ -1,5 +1,13 @@
-<mat-vertical-stepper class="mat-elevation-z4" #linearVerticalStepper="matVerticalStepper" [linear]="true"
-  [selectedIndex]="0">
+<div *ngIf="auth.user">
+  <form [formGroup]="calculatorForm.get('store')" fxLayout fxLayoutAlign="center center" fxLayoutGap="20px">
+    <mat-form-field>
+      <input matInput type="text" formControlName="name" name="name" placeholder="Nom">
+    </mat-form-field>
+    <button [disabled]="calculatorForm.invalid" mat-raised-button color="primary">Enregistrer</button>
+  </form>
+</div>
+<mat-divider></mat-divider>
+<mat-vertical-stepper #linearVerticalStepper="matVerticalStepper" [linear]="true" [selectedIndex]="4">
   <mat-step #achatStep [stepControl]="calculatorForm.get('achat')">
     <form [formGroup]="calculatorForm.get('achat')">
       <ng-template matStepLabel><span class="mat-h2">Achat</span></ng-template>
@@ -183,9 +191,7 @@
           </mat-card>
         </div>
       </div>
-      <div>
-        <button mat-raised-button color="primary" matStepperPrevious>Précèdant</button>
-      </div>
+
     </div>
   </mat-step>
 </mat-vertical-stepper>
