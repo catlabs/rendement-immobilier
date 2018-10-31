@@ -11,22 +11,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private hasInit: boolean = false;
+  private hasInit: Boolean = false;
   public items: Observable<any[]>;
 
-  constructor(private db: AngularFirestore, private authService:AuthService, private router: Router) {
+  constructor(private db: AngularFirestore, private authService: AuthService, private router: Router) {
       this.items = db.collection('/simulations').valueChanges();
       this.authService.user$.subscribe(
         (user) => {
           this.hasInit = true;
-          if(user){
-            this.router.navigateByUrl("dashboard");
+          if (user) {
+            this.router.navigateByUrl('dashboard');
           }
         }
       );
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
   }
 }

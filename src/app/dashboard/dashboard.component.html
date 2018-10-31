@@ -1,34 +1,17 @@
 <div class="catlabs-immo-container" fxFlex="100" [fxFlex.gt-md]="'980px'">
   <h1 class="mat-display-3">Dashboard</h1>
-  <div fxLayout fxLayoutAlign="space-around center">
-    <mat-card class="add-card" fxLayout fxLayoutAlign="center center" (click)="openDialogAddSimulation()">
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayout.lt-md="column" fxLayoutAlign.lt-md="start center">
+    <mat-card class="add-card" (click)="openDialogAddSimulation()">
       <div fxLayout="column" fxLayoutAlign="center center">
-          <mat-icon color="primary" [inline]="true">add</mat-icon>
+          <div><mat-icon color="primary" [inline]="true">add</mat-icon></div>
           <h2 class="mat-h2">Ajouter une simulation</h2>
+      </div>
+    </mat-card>
+    <mat-card *ngFor="let simulation of simulations | async; let i = index; trackBy: trackByFn" (click)="openDialogAddSimulation(simulation)">
+      <div fxLayout="column" fxLayoutAlign="center center">
+          <h2 class="mat-h2">{{simulation.store.name}}</h2>
+          <p><b>{{simulation.balance | number:'1.0-0'}}€ / mois</b></p>
       </div>
     </mat-card>
   </div>
 </div>
-<!--<div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>-->

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'catlabs-immo-calculator',
@@ -26,7 +27,7 @@ export class CalculatorComponent implements OnInit {
 
   calculatorForm: FormGroup;
 
-  constructor(private fb: FormBuilder, public auth:AuthService) { }
+  constructor(private fb: FormBuilder, public auth:AuthService, private db:AngularFirestore) { }
 
   ngOnInit() {
     this.calculatorForm = this.fb.group({
@@ -54,7 +55,7 @@ export class CalculatorComponent implements OnInit {
       })
     });
 
-    /*this.calculatorForm = this.fb.group({
+    this.calculatorForm = this.fb.group({
       achat: this.fb.group({
         prix: [280000, Validators.required],
         type: [0.15]
@@ -77,16 +78,16 @@ export class CalculatorComponent implements OnInit {
       store: this.fb.group({
         name: [undefined, Validators.required]
       })
-    });*/
+    });
 
 
     this.generateResult();
-    //console.log(this.calculatorForm.value);
-    //(100000 * 0.02 / 12) / ( 1 - Math.pow(( 1 + 0.02 / 12 ), -240))
+    // console.log(this.calculatorForm.value);
+    // (100000 * 0.02 / 12) / ( 1 - Math.pow(( 1 + 0.02 / 12 ), -240))
 
     this.calculatorForm.valueChanges.subscribe(val=>{
       this.generateResult();
-      //this.calculatorForm.get('enregistrement').setValue(val.achat*val.type, {onlySelf: true});
+      // this.calculatorForm.get('enregistrement').setValue(val.achat*val.type, {onlySelf: true});
     });
   }
 
@@ -106,6 +107,6 @@ export class CalculatorComponent implements OnInit {
   }
 
   onSubmit() {
-    console.debug(this.calculatorForm.value);
+    this.db.collection('simulations').add({...this.calculatorForm.value, ...{balance: this.balance, uid: this.auth.user.uid}});
   }
 }
