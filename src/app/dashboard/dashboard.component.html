@@ -7,7 +7,7 @@
           <h2 class="mat-h2">Ajouter une simulation</h2>
       </div>
     </mat-card>
-    <mat-card *ngFor="let simulation of simulations | async; let i = index; trackBy: trackByFn" (click)="openDialogAddSimulation(simulation)">
+    <mat-card *ngFor="let simulation of simulations | async; let i = index; trackBy: trackByFn" (click)="openDialogAddSimulation(simulation.id)">
       <div fxLayout="column" fxLayoutAlign="center center">
           <h2 class="mat-h2">{{simulation.store.name}}</h2>
           <p><b>{{simulation.balance | number:'1.0-0'}}€ / mois</b></p>

@@ -2,37 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { CalculatorComponent } from '../calculator/calculator/calculator.component';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Simulation, SimulationId } from './../shared/models/simulation';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'catlabs-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  public simulations: Observable<any[]>;
+  public simulations: Observable<SimulationId[]>;
 
-  constructor(public dialog: MatDialog, public db: AngularFirestore) {}
+  constructor(public dialog: MatDialog, public db: AngularFirestore) { }
 
   ngOnInit() {
-    this.simulations = this.db.collection('/simulations').valueChanges();
+    const simulationsCollection: AngularFirestoreCollection<Simulation> = this.db.collection<Simulation>('simulations');
+    this.simulations = simulationsCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Simulation;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
     this.simulations.subscribe(
       (simulations) => {
         console.log(simulations);
       }
     );
-
-    const sim = this.db.doc('/simulations/BNzKe1v7E0IKslSzg6YZ').valueChanges();
-    sim.subscribe(
-      (simu) => {
-        console.log(simu);
-      }
-    );
   }
 
-  openDialogAddSimulation(sim: any = null) {
-    console.log(sim.$key);
+  openDialogAddSimulation(simId: any = null) {
     const dialogRef = this.dialog.open(CalculatorComponent, {
+      data: { simId: simId },
       width: '800px'
     });
   }

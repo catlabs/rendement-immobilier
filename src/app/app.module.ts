@@ -11,7 +11,30 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatRadioModule, MatSnackBarModule, MatSidenavModule, MatStepperModule, MatProgressSpinnerModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatTooltipModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatInputModule } from '@angular/material';
+import { MatToolbarModule,
+  MatButtonModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatRadioModule,
+  MatSnackBarModule,
+  MatSidenavModule,
+  MatStepperModule,
+  MatProgressSpinnerModule,
+  MatIconModule,
+  MatListModule,
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule,
+  MatTableModule,
+  MatTooltipModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatFormFieldModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatInputModule
+} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -57,7 +80,7 @@ const appRoutes: Routes = [
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    MatStepperModule,     
+    MatStepperModule,
     MatOptionModule,
     MatProgressSpinnerModule,
     MatRadioModule,

@@ -7,7 +7,7 @@
   </form>
 </div>
 <mat-divider></mat-divider>
-<mat-vertical-stepper #linearVerticalStepper="matVerticalStepper" [linear]="true" [selectedIndex]="4">
+<mat-vertical-stepper #linearVerticalStepper="matVerticalStepper" [linear]="true" [selectedIndex]="0">
   <mat-step #achatStep [stepControl]="calculatorForm.get('achat')">
     <form [formGroup]="calculatorForm.get('achat')">
       <ng-template matStepLabel><span class="mat-h2">Achat</span></ng-template>
