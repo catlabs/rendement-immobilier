@@ -7,7 +7,20 @@ export interface Simulation {
         charges: Number;
         precompte: Number;
         travauxAchat: Number;
-        travauxEntretien: Number;
+        chargesCopro: Number;
+    };
+    financement: {
+        cash: Number;
+        taux: Number;
+        years: Number;
+    };
+    incomes: {
+        loyer: Number;
+        videLocatif: Number;
+    };
+    store: {
+        name: String;
+        url: String;
     };
 }
 

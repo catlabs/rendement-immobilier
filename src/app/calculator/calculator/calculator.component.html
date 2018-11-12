@@ -3,11 +3,14 @@
     <mat-form-field>
       <input matInput type="text" formControlName="name" name="name" placeholder="Nom">
     </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" formControlName="url" name="url" placeholder="URL">
+    </mat-form-field>
     <button [disabled]="calculatorForm.invalid" mat-raised-button color="primary">Enregistrer</button>
   </form>
+  <mat-divider></mat-divider>
 </div>
-<mat-divider></mat-divider>
-<mat-vertical-stepper #linearVerticalStepper="matVerticalStepper" [linear]="true" [selectedIndex]="0">
+<mat-vertical-stepper #linearVerticalStepper="matVerticalStepper" [linear]="isNew" [selectedIndex]="0">
   <mat-step #achatStep [stepControl]="calculatorForm.get('achat')">
     <form [formGroup]="calculatorForm.get('achat')">
       <ng-template matStepLabel><span class="mat-h2">Achat</span></ng-template>
@@ -17,7 +20,7 @@
             <input matInput type="number" formControlName="prix" name="prix" placeholder="Prix d'achat">
           </mat-form-field>
           <mat-radio-group fxLayout fxLayoutGap="20px" formControlName="type">
-            <mat-radio-button color="primary" [value]="0.22">
+            <mat-radio-button color="primary" [value]="0.25">
               Neuf
             </mat-radio-button>
             <mat-radio-button color="primary" [value]="0.15">
@@ -41,7 +44,7 @@
             <input matInput type="number" formControlName="travauxAchat" name="travauxAchat" placeholder="Travaux à l'achat">
           </mat-form-field>
           <mat-form-field>
-            <input matInput type="number" formControlName="travauxEntretien" name="travauxEntretien" placeholder="Travaux d'entretien / mois">
+            <input matInput type="number" formControlName="chargesCopro" name="chargesCopro" placeholder="Travaux d'entretien / mois">
           </mat-form-field>
           <mat-form-field>
             <input matInput type="number" formControlName="charges" name="charges" placeholder="Charges / mois">
@@ -157,7 +160,7 @@
               <div fxLayout fxLayoutAlign="space-between center"><span>Précompte:</span> <span>{{
                   (calculatorForm.getRawValue().extraCosts.precompte/12) | number:'1.0-0' }}€</span></div>
               <div fxLayout fxLayoutAlign="space-between center"><span>Entretien:</span> <span>{{
-                  calculatorForm.getRawValue().extraCosts.travauxEntretien | number:'1.0-0'}}€</span></div>
+                  calculatorForm.getRawValue().extraCosts.chargesCopro | number:'1.0-0'}}€</span></div>
               <mat-divider></mat-divider>
               <div fxLayout fxLayoutAlign="space-between center"><span><b>Total:</b></span> <span><b>{{ sorties.total |
                     number:'1.0-0'}}€</b></span></div>
@@ -187,7 +190,7 @@
           <mat-card class="result">
             <p class="mat-display-1">Balance / mois: {{balance | number:'1.0-0'}}€</p>
             <p class="mat-display-1">Balance sur {{calculatorForm.getRawValue().financement.years}} ans:
-              {{balance*12*calculatorForm.getRawValue().financement.years | number:'1.0-0'}}€</p>
+              {{ balance*12*calculatorForm.getRawValue().financement.years - calculatorForm.getRawValue().financement.cash | number:'1.0-0'}}€</p>
           </mat-card>
         </div>
       </div>

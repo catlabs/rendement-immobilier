@@ -53,6 +53,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'sign-up', component: RegisterPageComponent },
   { path: '', component: VisitorPageComponent },
+  { path: 'simulation/:id', component: VisitorPageComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 ];
 
