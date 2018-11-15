@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class AuthService {
   private userSubject: Subject<firebase.User>;
   public user$: Observable<firebase.User>;
 
-  constructor(private auth:AngularFireAuth) {
+  constructor(private auth: AngularFireAuth) {
     this.userSubject = new Subject();
     this.user$ = this.userSubject.asObservable();
     this.auth.user.subscribe(
@@ -21,7 +21,18 @@ export class AuthService {
     );
   }
 
-  logout(){
+  logout() {
     this.auth.auth.signOut();
   }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class MockAuthService {
+  public user: string;
+  public user$: Observable<firebase.User> = new Observable<firebase.User>();
+
+  logout() {}
 }

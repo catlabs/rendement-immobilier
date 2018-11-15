@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private hasInit: Boolean = false;
-  public items: Observable<any[]>;
+  hasInit = false;
+  items: Observable<any[]>;
 
-  constructor(private db: AngularFirestore, private authService: AuthService, private router: Router) {
+  constructor(private db: AngularFirestore, public authService: AuthService, private router: Router) {
       this.items = db.collection('/simulations').valueChanges();
       this.authService.user$.subscribe(
         (user) => {

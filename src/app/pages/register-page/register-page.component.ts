@@ -5,15 +5,15 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register-page',
+  selector: 'catlabs-register-page',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss']
 })
 export class RegisterPageComponent implements OnInit {
-  isLoading: boolean = false;
+  isLoading = false;
   registerForm: FormGroup;
 
-  constructor(public fb: FormBuilder, private auth: AngularFireAuth, public snackBar: MatSnackBar, private router:Router) { }
+  constructor(public fb: FormBuilder, private auth: AngularFireAuth, public snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -27,18 +27,18 @@ export class RegisterPageComponent implements OnInit {
       this.isLoading = true;
       this.auth.auth.createUserWithEmailAndPassword(this.registerForm.value.email, this.registerForm.value.password)
         .then((_result) => {
-          this.snackBar.open("Vous êtes inscrit!", "", {
+          this.snackBar.open('Vous êtes inscrit!', '', {
             duration: 3000,
-            panelClass: "success"
+            panelClass: 'success'
           });
           this.isLoading = false;
           this.auth.auth.signInWithEmailAndPassword(this.registerForm.value.email, this.registerForm.value.password);
-          this.router.navigateByUrl("dashboard");
-          
+          this.router.navigateByUrl('dashboard');
+
         }, (err) => {
-          this.snackBar.open("Erreur lors de l'inscription: "+err.message, "", {
+          this.snackBar.open('Erreur lors de l\'inscription: ' + err.message, '', {
             duration: 3000,
-            panelClass: "error"
+            panelClass: 'error'
           });
           this.isLoading = false;
         });

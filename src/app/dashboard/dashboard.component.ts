@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { CalculatorComponent } from '../calculator/calculator/calculator.component';
+import { CalculatorComponent } from '../calculator/calculator.component';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Simulation, SimulationId } from './../shared/models/simulation';
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'catlabs-dashboard',
@@ -14,10 +15,13 @@ import { Simulation, SimulationId } from './../shared/models/simulation';
 export class DashboardComponent implements OnInit {
   public simulations: Observable<SimulationId[]>;
 
-  constructor(public dialog: MatDialog, public db: AngularFirestore) { }
+  constructor(public dialog: MatDialog, public db: AngularFirestore, private auth: AuthService) { }
 
   ngOnInit() {
-    const simulationsCollection: AngularFirestoreCollection<Simulation> = this.db.collection<Simulation>('simulations');
+    const simulationsCollection: AngularFirestoreCollection<Simulation> = this.db.collection<Simulation>(
+      'simulations',
+      ref => ref.where('uid', '==', this.auth.user.uid)
+    );
     this.simulations = simulationsCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Simulation;

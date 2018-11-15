@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs';
-import { AuthService } from '../../core/auth.service';
-import { Simulation } from '../../shared/models/simulation';
+import { AuthService } from '../core/auth.service';
+import { Simulation } from '../shared/models/simulation';
 
 @Component({
   selector: 'catlabs-immo-calculator',
@@ -88,10 +88,8 @@ export class CalculatorComponent implements OnInit {
       );
     }
     this.populateForm();
-    // (100000 * 0.02 / 12) / ( 1 - Math.pow(( 1 + 0.02 / 12 ), -240))
     this.calculatorForm.valueChanges.subscribe(val => {
       this.generateResult();
-      // this.calculatorForm.get('enregistrement').setValue(val.achat*val.type, {onlySelf: true});
     });
   }
 
@@ -141,31 +139,6 @@ export class CalculatorComponent implements OnInit {
       })
     });
     this.generateResult();
-
-    /*this.calculatorForm = this.fb.group({
-      achat: this.fb.group({
-        prix: [280000, Validators.required],
-        type: [0.15]
-      }),
-      extraCosts: this.fb.group({
-        charges: [350, Validators.required],
-        precompte: [1000, Validators.required],
-        travauxAchat: [10000, Validators.required],
-        chargesCopro: [50, Validators.required]
-      }),
-      financement: this.fb.group({
-        cash: [20000],
-        taux: [1.8, Validators.required],
-        years: [20, Validators.required]
-      }),
-      incomes: this.fb.group({
-        loyer: [1700, Validators.required],
-        videLocatif: [1, Validators.required]
-      }),
-      store: this.fb.group({
-        name: [undefined, Validators.required]
-      })
-    });*/
   }
 
   onSubmit() {

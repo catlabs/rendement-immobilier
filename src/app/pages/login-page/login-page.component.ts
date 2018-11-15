@@ -6,15 +6,15 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'catlabs-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
-  isLoading: boolean = false;
+  isLoading = false;
   loginForm: FormGroup;
 
-  constructor(public fb: FormBuilder, private auth: AngularFireAuth, public snackBar: MatSnackBar, private router:Router) { }
+  constructor(public fb: FormBuilder, private auth: AngularFireAuth, public snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -29,12 +29,12 @@ export class LoginPageComponent implements OnInit {
       this.auth.auth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
         .then( (_result) => {
           this.isLoading = false;
-          this.router.navigateByUrl("dashboard");
+          this.router.navigateByUrl('dashboard');
         }, (err) => {
           this.isLoading = false;
-          this.snackBar.open("Erreur lors de l'inscription: "+err.message, "", {
+          this.snackBar.open('Erreur lors de l\'inscription: ' + err.message, '', {
             duration: 3000,
-            panelClass: "error"
+            panelClass: 'error'
           });
         });
     }
