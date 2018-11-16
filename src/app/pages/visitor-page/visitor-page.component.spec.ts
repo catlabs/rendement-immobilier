@@ -2,8 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VisitorPageComponent } from './visitor-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CalculatorModule } from 'src/app/calculator/calculator.module';
 import { ActivatedRoute } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('VisitorPageComponent', () => {
   let component: VisitorPageComponent;
@@ -23,10 +23,10 @@ describe('VisitorPageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [VisitorPageComponent],
       imports: [
-        CalculatorModule,
         SharedModule
       ],
       providers: [ {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
       .compileComponents();
   }));

@@ -1,14 +1,10 @@
 import { NO_ERRORS_SCHEMA, Directive, Input, DebugElement } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material';
-import { firebaseConfig } from './database-keys';
-import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireModule } from '@angular/fire';
 import { AuthService, MockAuthService } from './core/auth.service';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
@@ -26,7 +22,7 @@ export class RouterLinkDirectiveStub {
   }
 }
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let app: AppComponent;
   let auth: MockAuthService;
@@ -38,20 +34,15 @@ fdescribe('AppComponent', () => {
         RouterLinkDirectiveStub
       ],
       imports: [
-        AngularFireModule.initializeApp(firebaseConfig),
-        AngularFirestoreModule,
-        MatToolbarModule,
-        SharedModule
+        MatToolbarModule
       ],
       providers: [
-        AngularFirestore,
         {
           provide: AuthService,
           useClass: MockAuthService
         },
         {
-          provide: Router,
-          useClass: class { navigate = jasmine.createSpy('navigate'); }
+          provide: Router
         }
       ],
       schemas: [ NO_ERRORS_SCHEMA ]
@@ -82,7 +73,7 @@ fdescribe('AppComponent', () => {
     }));
 
     it('should not have a login button when authentificated', () => {
-      auth.user = 'test user';
+      auth.user = 'test auth user';
       fixture.detectChanges();
       const loginButton = fixture.debugElement.query(By.css('.mat-toolbar button[routerLink="/login"]'));
       expect(loginButton).toBeNull();
@@ -90,7 +81,7 @@ fdescribe('AppComponent', () => {
 
     it('should have a logout button when authentificated', () => {
       spyOn(app, 'logout');
-      auth.user = 'test user';
+      auth.user = 'test auth user';
       fixture.detectChanges();
       const logoutButton = fixture.debugElement.nativeElement.querySelector('.mat-toolbar button');
       expect(logoutButton.textContent).toBe('Deconnection');

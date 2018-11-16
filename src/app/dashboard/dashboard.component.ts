@@ -29,12 +29,6 @@ export class DashboardComponent implements OnInit {
         return { id, ...data };
       }))
     );
-
-    /* this.simulations.subscribe(
-      (simulations) => {
-        console.log(simulations);
-      }
-    ); */
   }
 
   openDialogAddSimulation(simId: any = null) {

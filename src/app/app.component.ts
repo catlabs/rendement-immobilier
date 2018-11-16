@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from './core/auth.service';
 import { Router } from '@angular/router';
 
@@ -14,8 +13,7 @@ export class AppComponent {
   hasInit = false;
   items: Observable<any[]>;
 
-  constructor(private db: AngularFirestore, public authService: AuthService, private router: Router) {
-      this.items = db.collection('/simulations').valueChanges();
+  constructor(private authService: AuthService, private router: Router) {
       this.authService.user$.subscribe(
         (user) => {
           this.hasInit = true;
