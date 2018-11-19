@@ -17,6 +17,7 @@ export class AuthService {
       (user: firebase.User) => {
         this.userSubject.next(user);
         this.user = user;
+
       }
     );
   }
