@@ -88,9 +88,6 @@ export class CalculatorComponent implements OnInit {
       );
     }
     this.populateForm();
-    this.calculatorForm.valueChanges.subscribe(val => {
-      this.generateResult();
-    });
   }
 
   generateResult() {
@@ -138,6 +135,11 @@ export class CalculatorComponent implements OnInit {
         url: [this.simulation.store.url]
       })
     });
+
+    this.calculatorForm.valueChanges.subscribe(val => {
+      this.generateResult();
+    });
+
     this.generateResult();
   }
 
